@@ -78,7 +78,7 @@ def run_training_and_evaluation(cfg: SBIRConfig, eval_only_baseline: bool = Fals
     print(f"[DATA] Seen ({len(manager.seen_classes)} classes): {len(seen_photos)} photos | {len(seen_sketches)} sketches")
     print(f"[DATA] Unseen ({len(manager.unseen_classes)} classes): {len(unseen_photos)} photos | {len(unseen_sketches)} sketches")
 
-    clip_model, _ = clip.load(cfg.clip_backbone, device=device, jit=False)
+    clip_model, _ = clip.load(cfg.clip_backbone, device=device, jit=False).float()
     model = AsymmetricHybridLoRACLIP(
         clip_model=clip_model,
         lora_rank=cfg.lora_rank,
