@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-================================================================================
-FILE: config.py
-ROLE: Central Configuration, Zero-Shot Split Protocols & Reproducibility Utils
-PROJECT: Zero-Shot & Generalized Sketch-Based Image Retrieval (CS331)
-================================================================================
-"""
+
 
 import random
 from dataclasses import dataclass
@@ -21,8 +16,7 @@ except ImportError:
     TORCH_AVAILABLE = False
 
 
-# Canonical 21 Unseen Categories absent from ImageNet-1K (Yelamarthi et al., ECCV 2018;
-# standard benchmark in CLIP-AT CVPR'23, SketchFusion CVPR'25, and SeCo-SBIR MM'26)
+
 SKETCHY_SPLIT2_UNSEEN_21: List[str] = [
     "cabin", "cow", "dolphin", "door", "giraffe",
     "helicopter", "mouse", "pear", "raccoon", "rhinoceros",
@@ -70,7 +64,7 @@ class SBIRConfig:
     res_scale: float = 0.2
     unfreeze_sketch_ln: bool = True
 
-    # Multi-Objective Loss Hyperparameters (SeCo-SBIR MM'26)
+    # Multi-Objective Loss Hyperparameters 
     triplet_margin: float = 0.3
     temp_ntxent: float = 0.07
     temp_cls: float = 0.07
