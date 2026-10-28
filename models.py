@@ -1,13 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-================================================================================
-FILE: models.py
-ROLE: Asymmetric Hybrid LoRA-CLIP Architecture, Bottleneck Residual Adapters &
-      Text Semantic Prototype Generator
-PROJECT: Zero-Shot & Generalized Sketch-Based Image Retrieval (CS331)
-================================================================================
-"""
+
 
 import copy
 import math
