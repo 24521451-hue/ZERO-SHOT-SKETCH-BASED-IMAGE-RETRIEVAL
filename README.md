@@ -7,15 +7,14 @@ Kiến trúc **Asymmetric Hybrid LoRA-CLIP kết hợp Semantic Consistency & Ad
 
 Toàn bộ mã nguồn được tách biệt thành 5 mô-đun độc lập theo đúng chuẩn phát triển phần mềm AI:
 
-| Tên File | Vai trò & Trách nhiệm Kỹ thuật | Phân công Phụ trách |
+| Tên File | Vai trò & Trách nhiệm Kỹ thuật |
 | :--- | :--- | :--- |
-| `config.py` | Quản lý tập trung toàn bộ siêu tham số (`SBIRConfig`), danh sách chuẩn 21 lớp Unseen (`SKETCHY_SPLIT2_UNSEEN_21`), hằng số chuẩn hóa CLIP và hàm khóa seed tái lập kết quả (`set_reproducible_seed`). | Dùng chung (Shared Interface) |
-| `dataset.py` | Cài đặt `SketchCVPreprocessor` (chuyển đổi RGBA an toàn, `Tight-Crop + Symmetric Padding 1:1`, `Morphological Dilation/Erosion`, `White Random Erasing`), trình quét 2 thư mục `SketchyExtendedSplitManager` và `SeCoLoRATripletDataset`. | Thành viên B (Data & CV Lead) |
-| `models.py` | Định nghĩa `LowRankLinearAdapter` (LoRA cho tầng Self-Attention), `BottleneckResidualAdapter` (khởi tạo 0 bảo toàn không gian CLIP ở Epoch 0), kiến trúc `AsymmetricHybridLoRACLIP` và hàm sinh `build_clip_text_prototypes`. | Thành viên A (Model Lead) |
-| `losses.py` | Cài đặt hàm mục tiêu đa thành phần `SeCoLoRAMultiObjectiveLoss` kết hợp 4 hàm mất mát: $\mathcal{L}_{\text{triplet}}$, $\mathcal{L}_{\text{NT-Xent}}$, $\mathcal{L}_{\text{class}}$ (Text Semantic Prototype) và $\mathcal{L}_{\text{consist}}$ (Asymmetric Perturbation InfoNCE). | Thành viên A (Optimization Lead) |
-| `evaluate.py` | Bộ đo lường vector hóa tốc độ cao cho Category-level (`mAP@all`, `mAP@200`, `P@100`, `P@200`), Fine-Grained (`Acc@1`, `Acc@5`, `Acc@10`) và bộ lọc ngoại lai `AdaptiveOODDetector` (`AUROC`, `FPR@95TPR`). | Thành viên B (Eval & OOD Lead) |
-| `train.py` | Điểm vào dòng lệnh (CLI Entrypoint) điều phối toàn bộ quy trình: kiểm thử tự động (`--self-test`), đánh giá Baseline 0 (`--eval-baseline-only`), huấn luyện Mixed Precision (`fp16`) và lưu checkpoint tốt nhất. | Tích hợp chung |
-
+| `config.py` | Quản lý tập trung toàn bộ siêu tham số (`SBIRConfig`), danh sách chuẩn 21 lớp Unseen (`SKETCHY_SPLIT2_UNSEEN_21`), hằng số chuẩn hóa CLIP và hàm khóa seed tái lập kết quả (`set_reproducible_seed`). |Interface) |
+| `dataset.py` | Cài đặt `SketchCVPreprocessor` (chuyển đổi RGBA an toàn, `Tight-Crop + Symmetric Padding 1:1`, `Morphological Dilation/Erosion`, `White Random Erasing`), trình quét 2 thư mục `SketchyExtendedSplitManager` và `SeCoLoRATripletDataset`. |
+| `models.py` | Định nghĩa `LowRankLinearAdapter` (LoRA cho tầng Self-Attention), `BottleneckResidualAdapter` (khởi tạo 0 bảo toàn không gian CLIP ở Epoch 0), kiến trúc `AsymmetricHybridLoRACLIP` và hàm sinh `build_clip_text_prototypes`. |
+| `losses.py` | Cài đặt hàm mục tiêu đa thành phần `SeCoLoRAMultiObjectiveLoss` kết hợp 4 hàm mất mát: $\mathcal{L}_{\text{triplet}}$, $\mathcal{L}_{\text{NT-Xent}}$, $\mathcal{L}_{\text{class}}$ (Text Semantic Prototype) và $\mathcal{L}_{\text{consist}}$ (Asymmetric Perturbation InfoNCE). |
+| `evaluate.py` | Bộ đo lường vector hóa tốc độ cao cho Category-level (`mAP@all`, `mAP@200`, `P@100`, `P@200`), Fine-Grained (`Acc@1`, `Acc@5`, `Acc@10`) và bộ lọc ngoại lai `AdaptiveOODDetector` (`AUROC`, `FPR@95TPR`). |
+| `train.py` | Điểm vào dòng lệnh (CLI Entrypoint) điều phối toàn bộ quy trình: kiểm thử tự động (`--self-test`), đánh giá Baseline 0 (`--eval-baseline-only`), huấn luyện Mixed Precision (`fp16`) và lưu checkpoint tốt nhất. |
 ## 2. Hướng dẫn Cài đặt & Khởi chạy trên Kaggle / Google Colab
 
 ### Bước 1: Clone Repository & Cài đặt Thư viện
