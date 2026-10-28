@@ -1,13 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-================================================================================
-FILE: train.py
-ROLE: CLI Entrypoint for Zero-Shot Baseline, Full Training, GZS-SBIR Evaluation,
-      Ablation Studies & Self-Test Verification
-PROJECT: Zero-Shot & Generalized Sketch-Based Image Retrieval (CS331)
-================================================================================
-"""
+
 
 import os
 import argparse
