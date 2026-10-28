@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-================================================================================
-FILE: dataset.py
-ROLE: Sketch CV Preprocessing (Tight-Crop, 1:1 Padding, Morphology, Erasing),
-      2-Folder Sketchy-Extended Scanner & Dual-View PyTorch Datasets
-PROJECT: Zero-Shot & Generalized Sketch-Based Image Retrieval (CS331)
-================================================================================
-"""
+
+
 
 import math
 import random
