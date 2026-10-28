@@ -20,11 +20,7 @@ Toàn bộ mã nguồn được tách biệt thành 5 mô-đun độc lập theo
 
 ### Bước 1: Clone Repository & Cài đặt Thư viện
 
-```bash
-git clone <URL_GITHUB_CỦA_NHÓM>
-cd <TÊN_REPO>
-pip install -r requirements.txt
-```
+
 
 ### Bước 2: Chạy Kiểm thử Tự động (Unit Verification)
 
