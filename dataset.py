@@ -355,7 +355,7 @@ if TORCH_AVAILABLE:
             k_samples: int = 4,
             seed: int = 42,
         ):
-            super().__init__(None)
+            super().__init__()
             self.p_classes = p_classes
             self.k_samples = k_samples
             self.batch_size = p_classes * k_samples
