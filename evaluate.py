@@ -278,9 +278,9 @@ class AdaptiveOODDetector:
             t_f = text_prototypes / (np.linalg.norm(text_prototypes, axis=1, keepdims=True) + 1e-8)
             logits_txt = q_f @ t_f.T
             txt_max = logits_txt.max(axis=1)
-            # Smooth maximum (Energy score) normalized to cosine scale
-            shifted = (logits_txt - txt_max[:, None]) / self.energy_temp
-            energy_score = txt_max + self.energy_temp * np.log(np.exp(shifted).mean(axis=1) + 1e-8)
+            txt_mean = logits_txt.mean(axis=1)
+            # Peak cosine similarity reinforced by semantic distinctiveness margin
+            energy_score = txt_max + self.energy_temp * (txt_max - txt_mean)
             return self.alpha * vis_sim + (1.0 - self.alpha) * energy_score
 
         return vis_sim

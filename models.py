@@ -256,7 +256,7 @@ if TORCH_AVAILABLE:
                         m.bias.data.copy_(frz_b.to(m.bias.device, dtype=m.bias.dtype))
 
             try:
-                dtype = next(self.visual.parameters()).dtype
+                dtype = self.visual.conv1.weight.dtype
                 feat = self.visual(img_tensor.to(dtype)).float()
                 out = F.normalize(feat, dim=-1)
             finally:
@@ -273,7 +273,7 @@ if TORCH_AVAILABLE:
         def encode_sketch(self, sketch_tensor: torch.Tensor) -> torch.Tensor:
             """Encodes sketches through the LoRA-adapted ViT + Sketch Bottleneck Residual Adapter."""
             self._set_lora_mode(True)
-            dtype = next(self.visual.parameters()).dtype
+            dtype = self.visual.conv1.weight.dtype
             raw_feat = self.visual(sketch_tensor.to(dtype)).float()
             return self.sketch_adapter(F.normalize(raw_feat, dim=-1))
 
